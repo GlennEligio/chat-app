@@ -13,7 +13,13 @@ socket.on("newMessage", function (message) {
 });
 
 // emits the createMessage
-socket.emit("createMessage", {
-  from: "Mean",
-  text: "Created message",
-});
+socket.emit(
+  "createMessage",
+  {
+    from: "Mean",
+    text: "Created message",
+  },
+  () => {
+    console.log("Server got the message");
+  }
+);
