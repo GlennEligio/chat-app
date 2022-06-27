@@ -20,8 +20,36 @@ const io = new socketIO.Server(server);
 // define eventListener handlers of Server and sockets
 io.on("connection", (socket) => {
   console.log("A user connected");
+  socket.on("disconnect", (reason) => {
+    console.log(reason);
+  });
+
+  // message sent to new User
+  socket.emit("newMessage", {
+    from: "Admin",
+    text: "Welcome to the chat app",
+    createdAt: new Date().getTime(),
+  });
+
+  // meesage sent to all User except the new User
+  socket.broadcast.emit("newMessage", {
+    from: "Admin",
+    text: "New user joined the chat",
+    createdAt: new Date().getTime(),
+  });
+
+  // listens to createMessage event and then broadcast the message to all
+  socket.on("createMessage", (message) => {
+    console.log("Message: ", message);
+    io.emit("newMessage", {
+      from: message.from,
+      text: message.text,
+      createdAt: new Date().getTime(),
+    });
+  });
+
   socket.on("disconnect", () => {
-    console.log("The user was disconnected");
+    console.log("User was disconnected");
   });
 });
 
