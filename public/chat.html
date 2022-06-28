@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="/socket.io/socket.io.js" defer></script>
+    <script src="./js/chat.js" defer></script>
+    <link rel="stylesheet" href="./css/styles.css" />
+  </head>
+  <body>
+    <header>
+      <h1>People</h1>
+    </header>
+    <main>
+      <section class="message-list-section">
+        <div>
+          <ul style="list-style: none" id="message-list"></ul>
+        </div>
+      </section>
+      <section class="message-form-section">
+        <form id="message-form" class="message-form">
+          <input
+            type="text"
+            name="message"
+            id="message-input"
+            placeholder="Message"
+          />
+          <button type="submit">Send</button>
+          <button type="button" id="send-location">Send Location</button>
+        </form>
+      </section>
+      <template id="message-template">
+        <li class="message">
+          <div class="message__title">
+            <h4></h4>
+            <span></span>
+          </div>
+          <div class="message__body">
+            <p></p>
+          </div>
+        </li>
+      </template>
+      <template id="message-location-template">
+        <li class="message">
+          <div class="message__title">
+            <h4></h4>
+            <span></span>
+          </div>
+          <div class="message__body">
+            <a target="_blank">My current location</a>
+          </div>
+        </li>
+      </template>
+    </main>
+  </body>
+</html>

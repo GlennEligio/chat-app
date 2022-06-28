@@ -5,47 +5,29 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <script src="/socket.io/socket.io.js" defer></script>
-    <script src="./js/app.js" defer></script>
-    <script src="./js/lib/mustache.js" defer></script>
+    <script src="./js/index.js" defer></script>
+    <link rel="stylesheet" href="./css/styles.css" />
   </head>
   <body>
-    <header>
-      <h1>Chat app</h1>
-    </header>
-    <main>
-      <section>
-        <form id="message-form">
-          <input type="text" name="message" id="message-input" />
-          <button type="submit">Submit message</button>
-        </form>
-        <button id="send-location">Send Location</button>
-      </section>
-      <section>
-        <ul style="list-style: none" id="message-list"></ul>
-      </section>
-      <script id="message-template" type="text/template">
-        <li class="message">
-          <div class="message__title">
-            <h4>{{from}}</h4>
-            <span>{{createdAt}}</span>
-          </div>
-          <div class="message__body">
-            <p>{{text}}</p>
-          </div>
-        </li>
-      </script>
-      <script id="message-location-template" type="text/template">
-        <li class="message">
-          <div class="message__title">
-            <h4>{{from}}</h4>
-            <span>{{createdAt}}</span>
-          </div>
-          <div class="message__body">
-            <a href="{{url}}" target="_blank">My current location</a>
-          </div>
-        </li>
-      </script>
-    </main>
+    <div class="chat-container">
+      <div class="card">
+        <div class="card-title">
+          <h1>Join Room</h1>
+        </div>
+        <div class="card-body">
+          <form action="/chat.html">
+            <div class="form-control">
+              <label for="name">Display name</label>
+              <input type="text" name="name" id="name" />
+            </div>
+            <div class="form-control">
+              <label for="room">Room name</label>
+              <input type="text" name="room" id="room" />
+            </div>
+            <div class="form-control"><button type="submit">Enter</button></div>
+          </form>
+        </div>
+      </div>
+    </div>
   </body>
 </html>

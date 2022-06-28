@@ -2,6 +2,33 @@ const messageForm = document.querySelector("#message-form");
 const messageInput = document.querySelector("#message-input");
 const messageList = document.querySelector("#message-list");
 const sendLocationBtn = document.querySelector("#send-location");
+const messageTemplate = document.querySelector("#message-template");
+const messageLocationTemplate = document.querySelector(
+  "#message-location-template"
+);
+
+const scrollToBottom = () => {
+  const latestMessageEl = messageList.lastElementChild;
+  latestMessageEl.scrollIntoView();
+};
+
+const createMessage = (from, createdAt, text) => {
+  const messageTemp = messageTemplate.content.querySelector("li");
+  const messageEl = document.importNode(messageTemp, true);
+  messageEl.querySelector("h4").innerText = from;
+  messageEl.querySelector("span").innerText = createdAt;
+  messageEl.querySelector("p").innerText = text;
+  messageList.appendChild(messageEl);
+};
+
+const createLocationMessage = (from, createdAt, url) => {
+  const messageTemp = messageLocationTemplate.content.querySelector("li");
+  const messageEl = document.importNode(messageTemp, true);
+  messageEl.querySelector("h4").innerText = from;
+  messageEl.querySelector("span").innerText = createdAt;
+  messageEl.querySelector("a").setAttribute("href", url);
+  messageList.appendChild(messageEl);
+};
 
 const socket = io();
 
@@ -16,21 +43,17 @@ socket.on("disconnect", () => {
 // newLocationMessage listener
 socket.on("newLocationMessage", (message) => {
   console.log("New location received");
-  const li = document.createElement("li");
-  const a = document.createElement("a");
-  a.setAttribute("target", "_blank");
-  a.setAttribute("href", message.url);
-  a.innerText = "Location";
-  li.appendChild(a);
-  messageList.appendChild(li);
+  const { from, createdAt, url } = message;
+  createLocationMessage(from, createdAt, url);
+  scrollToBottom();
 });
 
 // listens to newMessage
 socket.on("newMessage", function (message) {
   console.log("New message: ", message);
-  const li = document.createElement("li");
-  li.innerText = `${message.from}: ${message.text}`;
-  messageList.appendChild(li);
+  const { from, createdAt, text } = message;
+  createMessage(from, createdAt, text);
+  scrollToBottom();
 });
 
 // // emits the createMessage
@@ -48,6 +71,10 @@ socket.on("newMessage", function (message) {
 messageForm.addEventListener("submit", function (event) {
   event.preventDefault();
   const enteredMessage = messageInput.value;
+
+  if (enteredMessage.trim().length === 0) {
+    return;
+  }
 
   socket.emit("createMessage", {
     from: "User",

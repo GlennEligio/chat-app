@@ -1,0 +1,152 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Roboto", sans-serif;
+}
+
+body {
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+}
+
+header {
+  flex: 2 0 150px;
+  padding: 15px;
+  background-color: #2a5a7e;
+  color: white;
+}
+
+main {
+  flex: 8 0 500px;
+  background-color: #f0eef2;
+
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+
+.message-list-section {
+  flex: 9 0 300px;
+  background-color: white;
+  overflow-y: auto;
+}
+
+.message-form-section {
+  flex: 1 0 0;
+}
+
+.message-form {
+  display: flex;
+  align-items: center;
+  margin-top: 15px;
+}
+
+.message-form input {
+  flex: 1 0 0px;
+  padding: 10px;
+  font-size: medium;
+}
+
+.message-form button {
+  margin-left: 10px;
+  padding: 10px;
+  background-color: #225e81;
+  color: white;
+  border: 0px;
+  font-size: medium;
+  cursor: pointer;
+}
+
+.message-form button:hover {
+  background-color: #0d4c70;
+}
+
+.message {
+  display: flex;
+  flex-direction: column;
+  margin: 20px;
+  justify-content: center;
+}
+
+.message__title {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  margin-bottom: 5px;
+}
+
+.message__title h4 {
+  margin-right: 10px;
+}
+
+.message__title span {
+  color: rgb(156, 165, 173);
+}
+
+.chat-container {
+  flex: 1 0 0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  background-image: linear-gradient(45deg, #305781, #2b5d80, #21556d);
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  margin: auto auto;
+  padding: 15px;
+
+  border-radius: 5px;
+  background-color: #ddd;
+
+  min-width: 300px;
+}
+
+.card .card-title {
+  margin: 10px 0px;
+  width: 100%;
+  text-align: center;
+}
+
+.card .card-body {
+  width: 100%;
+}
+
+.form-control {
+  display: block;
+  margin-bottom: 1rem;
+  height: 4rem;
+}
+
+.form-control label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.form-control input {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  font-size: medium;
+  border: 1px #fff;
+}
+
+.form-control button {
+  padding: 10px;
+  background-color: #225e81;
+  color: white;
+  border: 0px;
+  font-size: medium;
+  cursor: pointer;
+  width: 100%;
+}
