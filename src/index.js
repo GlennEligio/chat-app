@@ -3,7 +3,7 @@ const express = require("express");
 const path = require("path");
 const socketIO = require("socket.io");
 const http = require("http");
-const { generateMessage } = require("./utils/generateMessage");
+const { generateMessage, generateGeolocation } = require("./utils/utils");
 
 const port = process.env.PORT;
 const app = express();
@@ -21,8 +21,12 @@ const io = new socketIO.Server(server);
 // define eventListener handlers of Server and sockets
 io.on("connection", (socket) => {
   console.log("A user connected");
-  socket.on("disconnect", (reason) => {
-    console.log(reason);
+  socket.on("disconnect", (reason) => {});
+
+  // listens to Client's newLocationMessage, and broadcast it
+  socket.on("newLocationMessage", (message) => {
+    const { from, lat, long } = message;
+    io.emit("newLocationMessage", generateGeolocation(from, lat, long));
   });
 
   // message sent to new User
@@ -38,10 +42,9 @@ io.on("connection", (socket) => {
   );
 
   // listens to createMessage event and then broadcast the message to all
-  socket.on("createMessage", (message, callback) => {
+  socket.on("createMessage", (message) => {
     console.log("Message: ", message);
     io.emit("newMessage", generateMessage(message.from, message.text));
-    callback(200);
   });
 
   socket.on("disconnect", () => {

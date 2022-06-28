@@ -7,8 +7,45 @@
     <title>Document</title>
     <script src="/socket.io/socket.io.js" defer></script>
     <script src="./js/app.js" defer></script>
+    <script src="./js/lib/mustache.js" defer></script>
   </head>
   <body>
-    <h1>Chat app</h1>
+    <header>
+      <h1>Chat app</h1>
+    </header>
+    <main>
+      <section>
+        <form id="message-form">
+          <input type="text" name="message" id="message-input" />
+          <button type="submit">Submit message</button>
+        </form>
+        <button id="send-location">Send Location</button>
+      </section>
+      <section>
+        <ul style="list-style: none" id="message-list"></ul>
+      </section>
+      <script id="message-template" type="text/template">
+        <li class="message">
+          <div class="message__title">
+            <h4>{{from}}</h4>
+            <span>{{createdAt}}</span>
+          </div>
+          <div class="message__body">
+            <p>{{text}}</p>
+          </div>
+        </li>
+      </script>
+      <script id="message-location-template" type="text/template">
+        <li class="message">
+          <div class="message__title">
+            <h4>{{from}}</h4>
+            <span>{{createdAt}}</span>
+          </div>
+          <div class="message__body">
+            <a href="{{url}}" target="_blank">My current location</a>
+          </div>
+        </li>
+      </script>
+    </main>
   </body>
 </html>
