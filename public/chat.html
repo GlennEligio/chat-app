@@ -11,7 +11,10 @@
   </head>
   <body>
     <header>
-      <h1>People</h1>
+      <div class="people-list-section">
+        <h1>People</h1>
+        <ul style="list-style: none" id="people-list"></ul>
+      </div>
     </header>
     <main>
       <section class="message-list-section">
@@ -50,6 +53,13 @@
           </div>
           <div class="message__body">
             <a target="_blank">My current location</a>
+          </div>
+        </li>
+      </template>
+      <template id="people-template">
+        <li class="people">
+          <div class="people-name">
+            <h4></h4>
           </div>
         </li>
       </template>

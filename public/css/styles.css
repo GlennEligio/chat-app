@@ -15,9 +15,23 @@ body {
 
 header {
   flex: 2 0 150px;
+}
+
+.people-list-section {
   padding: 15px;
   background-color: #2a5a7e;
   color: white;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.people {
+  background-color: white;
+  color: black;
+  padding: 1rem;
+  margin: 10px 0px;
+  font-size: medium;
+  border-radius: 0.5rem;
 }
 
 main {
