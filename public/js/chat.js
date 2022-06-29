@@ -95,6 +95,8 @@ messageForm.addEventListener("submit", function (event) {
     text: enteredMessage,
   });
 
+  messageInput.value = "";
+
   console.log("Message sent");
 });
 
