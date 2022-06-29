@@ -5,6 +5,7 @@ const socketIO = require("socket.io");
 const http = require("http");
 const { generateMessage, generateGeolocation } = require("./utils/utils");
 const { Users } = require("./utils/users");
+const { isRealString } = require("./utils/validation");
 
 // initialize necessary variables
 const port = process.env.PORT;
@@ -28,6 +29,10 @@ io.on("connection", (socket) => {
   // listens to Client's newLocationMessage, and broadcast it
   socket.on("newLocationMessage", (message) => {
     const { name, room } = users.getUser(socket.id);
+    if (!isRealString(name) || !isRealString(room)) {
+      return;
+    }
+
     const { lat, long } = message;
     io.to(room).emit(
       "newLocationMessage",
@@ -39,6 +44,10 @@ io.on("connection", (socket) => {
   // socket join eventListener
   socket.on("join", (payload) => {
     const { name, room } = payload;
+    if (!isRealString(name) || !isRealString(room)) {
+      return;
+    }
+
     users.removeUser(socket.id);
     users.addUser(socket.id, name, room);
     socket.join(room);
@@ -63,6 +72,10 @@ io.on("connection", (socket) => {
   // listens to createMessage event and then broadcast the message to all
   socket.on("createMessage", (message) => {
     const user = users.getUser(socket.id);
+    if (!isRealString(message.text)) {
+      return;
+    }
+
     if (user) {
       console.log("createMessage ", message);
       io.to(user.room).emit(
